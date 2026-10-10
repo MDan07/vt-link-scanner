@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <h3>VT Link Scanner</h3>
+    <label class="switch" title="Turn link scanning on or off">
+      <input type="checkbox" id="enabledToggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div id="noKeyBanner" class="banner" hidden>No VirusTotal API keys set. Links are not being scanned.</div>
+  <div id="disabledBanner" class="banner" hidden>Scanning is turned off.</div>
+
+  <div class="file-scanner-card">
+    <div class="section-title">
+      <span>File Scanner</span>
+      <span class="count">🛡️</span>
+    </div>
+    <div class="hint">Scan a downloaded file with VirusTotal. The scanner first checks the file hash, so known files can be checked without uploading them again.</div>
+    <button id="openFileScannerBtn" class="file-scan-btn">Scan a downloaded file</button>
+  </div>
+
+  <div class="section-title">
+    <span>VirusTotal API keys</span>
+    <span id="apiKeyCount" class="count">0</span>
+  </div>
+
+  <div class="api-box">
+    <input type="password" id="apiKey" placeholder="Paste VirusTotal API key" autocomplete="off" />
+    <button id="addKeyBtn">Add</button>
+  </div>
+  <div id="saveMsg"></div>
+
+  <div id="apiKeysList" class="api-keys-list"></div>
+
+  <div class="key-file-actions">
+    <button id="importEnvBtn" class="secondary">Import .env</button>
+    <button id="exportEnvBtn" class="secondary">Export .env</button>
+    <input id="envFileInput" type="file" accept=".env,text/plain" hidden />
+  </div>
+
+  <div class="hint key-hint">
+    Add multiple keys from accounts you control. When a key is rate-limited, the scanner automatically rotates to another available key.
+    Export them to a <code>.env</code> file and import that file on another laptop.
+  </div>
+
+  <details class="settings">
+    <summary>Settings</summary>
+
+    <label class="setting">
+      Block when at least
+      <input type="number" id="minDetections" min="1" max="50" />
+      engines say malicious
+    </label>
+
+    <label class="setting">
+      <input type="checkbox" id="warnOnUnknown" />
+      Ask before opening links VirusTotal has never seen
+    </label>
+
+    <label class="setting">
+      <input type="checkbox" id="submitUnknown" />
+      Submit never-seen links for scanning
+      <span class="hint">(uses quota; the URL becomes visible on VirusTotal)</span>
+    </label>
+
+    <label class="setting">
+      <input type="checkbox" id="privacyMode" />
+      Privacy mode: for links with ?query data, check only the domain
+    </label>
+
+    <label class="setting">
+      <input type="checkbox" id="scanSameSite" />
+      Scan links on the same website too
+    </label>
+
+    <label class="setting">
+      <input type="checkbox" id="checkRedirectDestination" />
+      Check VirusTotal's known redirect destination when available
+    </label>
+
+    <label class="setting">
+      <input type="checkbox" id="autoDownloadMonitor" />
+      Automatically detect completed downloads and notify me to scan them
+    </label>
+
+    <div class="hint">Unknown links offer an explicit Deep Scan button. Deep Scan submits the URL to VirusTotal and waits for analysis.</div>
+
+    <button id="clearCacheBtn" class="secondary">Clear scan cache</button>
+    <div id="cacheMsg" class="hint"></div>
+  </details>
+
+  <div class="history-bar">
+    <span id="viewTitle">Scan History</span>
+    <div class="bar-buttons">
+      <button id="toggleViewBtn">Exceptions</button>
+      <button id="clearBtn">Clear</button>
+    </div>
+  </div>
+
+  <div id="historyList" class="history-list"></div>
+
+  <div id="exceptionsContainer" hidden>
+    <div class="api-box exception-box">
+      <input type="text" id="newException" placeholder="e.g. example.com" />
+      <button id="addExceptionBtn">Add</button>
+    </div>
+    <div id="exceptionMsg" class="hint"></div>
+    <div id="exceptionList" class="history-list"></div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

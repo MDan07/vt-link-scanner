@@ -1,0 +1,37 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #101012; color: #e4e4e7; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.app { max-width: 860px; margin: 0 auto; padding: 28px 20px 50px; }
+header { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
+h1 { margin: 0 0 5px; font-size: 24px; }
+h2 { margin: 0; font-size: 15px; }
+p { margin: 5px 0; line-height: 1.45; }
+header p, .muted { color: #a1a1aa; font-size: 13px; }
+.back { color: #93c5fd; text-decoration: none; font-size: 12px; }
+.card, .notice { background: #18181b; border: 1px solid #27272a; border-radius: 9px; padding: 16px; margin-bottom: 14px; }
+.notice { border-color: #7c5a12; background: #211b0c; color: #fde68a; font-size: 12px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.between { justify-content: space-between; }
+button { border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; color: white; background: #2563eb; font-weight: 600; }
+button:hover { background: #1d4ed8; }
+button:disabled { opacity: .55; cursor: default; }
+button.secondary { background: #3f3f46; font-size: 12px; padding: 6px 10px; }
+button.danger { background: #991b1b; }
+.file-name { margin-top: 10px; padding: 9px; background: #111113; border-radius: 6px; overflow-wrap: anywhere; }
+.progress { height: 7px; background: #27272a; border-radius: 10px; margin-top: 14px; overflow: hidden; }
+.progress > div { height: 100%; width: 0; background: #2563eb; transition: width .2s; }
+.status { margin-top: 12px; min-height: 20px; font-size: 13px; }
+.status.safe { color: #4ade80; }
+.status.warn { color: #fbbf24; }
+.status.danger { color: #f87171; }
+.status.info { color: #93c5fd; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.list { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+.item { display: flex; align-items: center; gap: 10px; padding: 10px; background: #111113; border: 1px solid #27272a; border-radius: 7px; }
+.item-main { flex: 1; min-width: 0; }
+.item-title { font-weight: 600; overflow-wrap: anywhere; }
+.item-meta { color: #71717a; font-size: 11px; margin-top: 3px; overflow-wrap: anywhere; }
+.badge { font-size: 18px; width: 25px; text-align: center; }
+.empty { text-align: center; color: #71717a; padding: 18px; font-size: 12px; }
+code { color: #d4d4d8; }
+@media (max-width: 650px) { header { flex-direction: column; } }

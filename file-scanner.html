@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VT Link Scanner — File Scanner</title>
+  <link rel="stylesheet" href="file-scanner.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <h1>VT File Scanner</h1>
+        <p>Scan downloaded files with VirusTotal before you open them.</p>
+      </div>
+      <a class="back" href="popup.html">Extension settings</a>
+    </header>
+
+    <section class="notice">
+      <strong>Privacy:</strong> The file is first hashed locally. If VirusTotal already knows that hash, the file itself is not uploaded. If it is unknown, you must explicitly choose to upload it to VirusTotal.
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <div>
+          <h2>Choose a downloaded file</h2>
+          <p class="muted">Chrome automatically detects completed downloads. Due to Chrome's security model, you still select the local file once; the scan starts automatically after selection.</p>
+        </div>
+      </div>
+      <input id="fileInput" type="file" hidden>
+      <button id="chooseBtn" class="primary">Choose file</button>
+      <div id="selectedFile" class="file-name muted">No file selected.</div>
+      <div id="progress" class="progress" hidden>
+        <div id="progressBar"></div>
+      </div>
+      <div id="status" class="status" aria-live="polite"></div>
+      <div id="actions" class="actions"></div>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>Recent downloads</h2>
+        <button id="refreshDownloadsBtn" class="secondary">Refresh</button>
+      </div>
+      <p class="muted">These are recent Chrome downloads. Click “Select” to choose the matching local file for scanning.</p>
+      <div id="downloadsList" class="list"></div>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>File scan history</h2>
+        <button id="clearHistoryBtn" class="secondary">Clear</button>
+      </div>
+      <div id="historyList" class="list"></div>
+    </section>
+  </main>
+  <script src="file-scanner.js"></script>
+</body>
+</html>
