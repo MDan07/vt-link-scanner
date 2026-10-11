@@ -76,11 +76,18 @@ The packaged Chrome extension is distributed as a `.crx` file through GitHub Rel
 5. Select the extracted project folder containing `manifest.json`.
 6. Add your VirusTotal API key(s) through the extension popup.
 
+
 **Option 2: Install the CRX package**
 
-1. Open the [Releases page](https://github.com/MDan07/vt-link-scanner/releases).
-2. Download `vt-link-scanner.crx`.
-3. Follow Chrome's supported installation process.
+1. Download `vt-link-scanner.crx` from the [GitHub Releases page](https://github.com/MDan07/vt-link-scanner/releases).
+2. Open Google Chrome and navigate to `chrome://extensions`, or go to **⋮ → Extensions → Manage Extensions**.
+3. Enable **Developer mode** using the toggle in the top-right corner.
+4. Drag and drop the downloaded `.crx` file onto the Chrome Extensions page.
+5. If Chrome permits the installation, follow the prompts and click **Add extension** if prompted.
+6. Open the extension and configure your VirusTotal API key(s).
+
+**Note:** Chrome may block CRX files installed from outside the Chrome Web Store, depending on your browser version and policies. If drag-and-drop installation is blocked, use the **Load unpacked** method described in Option 1.
+
 
 Chrome may block CRX installation from outside the Chrome Web Store. If installation is blocked, use the Load unpacked method.
 
