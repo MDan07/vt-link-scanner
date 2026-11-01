@@ -35,8 +35,23 @@ It combines VirusTotal threat intelligence with additional local URL-risk checks
       <img src="screenshots/Screenshot%202026-11-02%20044115.png" width="100%" alt="VT Link Scanner - Theme 6">
     </td>
   </tr>
+  
+  
 </table>
 
+URL Scan Results
+
+Unknown Link — No completed VirusTotal analysis
+
+<p align="center">
+  <img src="screenshots/unknown%20link.png" width="100%" alt="Unknown link warning notification">
+</p>
+
+Safe Link — No engines flagged the URL
+
+<p align="center">
+  <img src="screenshots/scan%20result.png" width="100%" alt="Safe link scan result notification">
+</p>
 ## Features
 
 ### URL Protection
