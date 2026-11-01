@@ -10,21 +10,32 @@ It combines VirusTotal threat intelligence with additional local URL-risk checks
 
 ## Screenshots
 
-### Application Preview
-
-![VT Link Scanner Screenshot 1](screenshots/Screenshot%202026-11-02%20044004.png)
-
-![VT Link Scanner Screenshot 2](screenshots/Screenshot%202026-11-02%20044015.png)
-
-![VT Link Scanner Screenshot 3](screenshots/Screenshot%202026-11-02%20044035.png)
-
-![VT Link Scanner Screenshot 4](screenshots/Screenshot%202026-11-02%20044050.png)
-
-![VT Link Scanner Screenshot 5](screenshots/Screenshot%202026-11-02%20044106.png)
-
-![VT Link Scanner Screenshot 6](screenshots/Screenshot%202026-11-02%20044115.png)
-
----
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="screenshots/Screenshot%202026-11-02%20044004.png" width="100%" alt="VT Link Scanner - Theme 1">
+    </td>
+    <td width="50%" align="center">
+      <img src="screenshots/Screenshot%202026-11-02%20044015.png" width="100%" alt="VT Link Scanner - Theme 2">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="screenshots/Screenshot%202026-11-02%20044035.png" width="100%" alt="VT Link Scanner - Theme 3">
+    </td>
+    <td width="50%" align="center">
+      <img src="screenshots/Screenshot%202026-11-02%20044050.png" width="100%" alt="VT Link Scanner - Theme 4">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="screenshots/Screenshot%202026-11-02%20044106.png" width="100%" alt="VT Link Scanner - Theme 5">
+    </td>
+    <td width="50%" align="center">
+      <img src="screenshots/Screenshot%202026-11-02%20044115.png" width="100%" alt="VT Link Scanner - Theme 6">
+    </td>
+  </tr>
+</table>
 
 ## Features
 
