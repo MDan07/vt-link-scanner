@@ -2,6 +2,15 @@
 
 A Chrome MV3 extension that checks HTTP(S) links against VirusTotal before opening them.
 
+## What's new in 2.4.0
+- 28 selectable appearance themes: 20 existing Glass / Liquid Glass themes plus 8 non-glass design-language themes.
+- New non-glass themes are grouped under **Beyond Glass** and marked with **✦✦ NEW**.
+- Improved contrast and readability across text, controls, inputs, buttons, and status surfaces.
+- Theme selection is shared by the popup and File Scanner.
+
+See [CHANGES.md](CHANGES.md) for the full changelog.
+
+
 ## Main features
 
 - Multiple VirusTotal API keys with automatic rotation/cooldown.
@@ -56,75 +65,41 @@ The scanner first calculates the file's SHA-256 locally and checks VirusTotal's 
 Chrome extensions cannot silently read arbitrary local downloaded-file bytes, so a completed download cannot be uploaded automatically just from the Downloads API. The user must select the file. Files up to 100 MB can be locally hashed; VirusTotal upload handling supports the normal direct endpoint and its larger-file upload URL where available.
 
 
+## Appearance themes (visual-only update)
 
----
+The interface includes 12 selectable dark glass finishes: Midnight, Arctic, Aurora, Emerald, Sapphire, Amethyst, Rose Quartz, Graphite, Solar Flare, Deep Ocean, Cyberpunk, and Carbon. The selected appearance is shared between the extension popup and File Scanner using extension-origin local storage.
 
-## Download the Packaged Extension
+This visual update adds `theme.js` and updates the popup/File Scanner HTML and CSS. The scanner engine, API-key cycling, VirusTotal requests, permissions, settings behavior, download detection, and file-scanning logic are unchanged.
 
-**[Download the latest release](https://github.com/MDan07/vt-link-scanner/releases/latest)**
-
-The packaged Chrome extension is distributed as a `.crx` file through GitHub Releases when a release asset is available.
-
-### Installation Options
-
-**Option 1: Load unpacked (recommended)**
-
-1. Download or clone this repository.
-2. Open `chrome://extensions` in Google Chrome.
-3. Enable **Developer mode**.
-4. Click **Load unpacked**.
-5. Select the extracted project folder containing `manifest.json`.
-6. Add your VirusTotal API key(s) through the extension popup.
+**Glass transparency limitation:** Chromium extension action popups are rendered as separate browser surfaces. CSS backdrop blur can style and blur the popup's own layered surfaces, but cannot reliably sample the live webpage behind the popup. The File Scanner tab can show layered glass over its own ambient background; the popup uses a simulated glass finish.
 
 
-**Option 2: Install the CRX package**
+## Glass Collection — Contrast Edition
 
-1. Download `vt-link-scanner.crx` from the [GitHub Releases page](https://github.com/MDan07/vt-link-scanner/releases).
-2. Open Google Chrome and navigate to `chrome://extensions`, or go to **⋮ → Extensions → Manage Extensions**.
-3. Enable **Developer mode** using the toggle in the top-right corner.
-4. Drag and drop the downloaded `.crx` file onto the Chrome Extensions page.
-5. If Chrome permits the installation, follow the prompts and click **Add extension** if prompted.
-6. Open the extension and configure your VirusTotal API key(s).
+The appearance system includes 20 dark glass finishes. The original 12 themes are retained, with 8 additional themes marked **✦ NEW** in the theme palette:
 
-**Note:** Chrome may block CRX files installed from outside the Chrome Web Store, depending on your browser version and policies. If drag-and-drop installation is blocked, use the **Load unpacked** method described in Option 1.
+- Obsidian
+- Cobalt
+- Lunar Silver
+- Crimson Noir
+- Jade Empire
+- Ultraviolet
+- Glacier
+- Copper Luxe
+
+The palette uses a custom high-contrast selector with visible swatches, readable labels, selected-state styling, and a small NEW marker on added themes. Theme selection is saved locally and shared between the extension popup and File Scanner page.
+
+The visual refinement increases secondary-text contrast and improves focus and hover visibility. Browser extension popups cannot reliably sample the webpage behind the popup; blur and translucency are therefore simulated within the extension surface.
 
 
-Chrome may block CRX installation from outside the Chrome Web Store. If installation is blocked, use the Load unpacked method.
+### Appearance themes
+The appearance picker keeps the original 20 glass finishes and adds 12 non-glass design languages: Swiss Clarity, Paper & Ink, Terminal CRT, Neo-Brutalist, Bauhaus, Material 3, Clay Studio, Y2K Chrome, Dark Academia, E-Ink Paper, Frutiger Aero, and Editorial Noir. New styles are marked with a double star (✦✦ NEW). The new options deliberately change surface treatment, typography mood, control shape, and contrast—not just the accent color.
 
-## Architecture Overview
 
-- **`content.js`** — Handles supported link interactions and communicates with the extension service worker.
-- **`background.js`** — Coordinates VirusTotal requests, API-key rotation, caching, URL scanning, and risk assessment.
-- **`utils.js`** — Contains shared URL and domain utilities.
-- **`popup.js` / `popup.html` / `popup.css`** — Provides API-key management, settings, exceptions, and scan history.
-- **`file-scanner.js` / `file-scanner.html` / `file-scanner.css`** — Implements the file-scanning interface and workflow.
-- **`manifest.json`** — Defines the extension configuration and browser permissions.
-
-## Security Testing
-
-Recommended test scenarios include:
-
-- Known malicious, suspicious, clean, and unknown URLs.
-- Invalid API keys, rate limits, and network failures.
-- Cache behavior and repeated scans.
-- Redirects and deceptive URL patterns.
-- Privacy-mode behavior and explicit Deep Scan submission.
-- Known and unknown file hashes, upload cancellation, and analysis failures.
-- Download detection and manual file selection.
-
-Record actual results before making claims about detection accuracy or reliability.
-
-## Known Limitations
-
-- A clean VirusTotal result does not guarantee that a resource is safe.
-- URL heuristics can produce false positives and false negatives.
-- Some JavaScript-driven navigations may not be intercepted.
-- RDAP registration information may be unavailable or incomplete.
-- Chrome extensions cannot silently read arbitrary downloaded-file contents through the Downloads API; the user must select the file before its contents can be hashed.
-- Deep Scan submits URLs to VirusTotal and may expose sensitive URL information.
-
-## Responsible Use
-
-Use only VirusTotal API keys you are authorized to use and follow the applicable service terms. Never commit real API keys, exported `.env` files, or other credentials to the repository.
-
-VT Link Scanner is an independent project and is not affiliated with or endorsed by VirusTotal.
+## Beyond Glass — refined design languages
+- Preserved all 20 original Glass Collection themes and all 8 added contrast-edition themes.
+- Retained 8 non-glass design languages: Swiss Clarity, Paper & Ink, Terminal CRT, Material 3, Dark Academia, E-Ink Paper, Frutiger Aero, and Editorial Noir.
+- Removed Neo-Brutalist, Bauhaus, Clay Studio, and Y2K Chrome from the picker because their visual treatment was too loud/inconsistent for the scanner interface.
+- Corrected helper/secondary text, warning banners, form controls, cards, and buttons with theme-matched contrast tokens.
+- Isolated the theme picker styling so the selected theme cannot recolor its own option buttons.
+- Kept the double-star (✦✦ NEW) marker on every retained new design language.

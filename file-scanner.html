@@ -16,6 +16,53 @@
       <a class="back" href="popup.html">Extension settings</a>
     </header>
 
+
+    <section class="theme-control page-theme-control" aria-label="Appearance themes">
+      <button class="theme-trigger" type="button" aria-expanded="false" aria-controls="themePalette">
+        <span class="theme-trigger-icon">◈</span>
+        <span class="theme-trigger-copy"><strong>Appearance</strong><small>Choose your visual style</small></span>
+        <span class="theme-current" id="currentThemeLabel">Midnight</span>
+        <span class="theme-chevron">⌄</span>
+      </button>
+      <div class="theme-palette" id="themePalette" hidden>
+        <div class="theme-palette-heading"><strong>Glass Collection</strong><span>20 original finishes</span></div>
+        <div class="theme-grid">
+          <button type="button" class="theme-option" data-theme="midnight"><i></i><span>Midnight</span></button>
+          <button type="button" class="theme-option" data-theme="arctic"><i></i><span>Arctic</span></button>
+          <button type="button" class="theme-option" data-theme="aurora"><i></i><span>Aurora</span></button>
+          <button type="button" class="theme-option" data-theme="emerald"><i></i><span>Emerald</span></button>
+          <button type="button" class="theme-option" data-theme="sapphire"><i></i><span>Sapphire</span></button>
+          <button type="button" class="theme-option" data-theme="amethyst"><i></i><span>Amethyst</span></button>
+          <button type="button" class="theme-option" data-theme="rose"><i></i><span>Rose Quartz</span></button>
+          <button type="button" class="theme-option" data-theme="graphite"><i></i><span>Graphite</span></button>
+          <button type="button" class="theme-option" data-theme="solar"><i></i><span>Solar Flare</span></button>
+          <button type="button" class="theme-option" data-theme="ocean"><i></i><span>Deep Ocean</span></button>
+          <button type="button" class="theme-option" data-theme="cyber"><i></i><span>Cyberpunk</span></button>
+          <button type="button" class="theme-option" data-theme="carbon"><i></i><span>Carbon</span></button>
+<button type="button" class="theme-option new-theme" data-theme="obsidian"><i></i><span>Obsidian</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="cobalt"><i></i><span>Cobalt</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="lunar"><i></i><span>Lunar Silver</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="crimson"><i></i><span>Crimson Noir</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="jade"><i></i><span>Jade Empire</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="ultraviolet"><i></i><span>Ultraviolet</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="glacier"><i></i><span>Glacier</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+<button type="button" class="theme-option new-theme" data-theme="copper"><i></i><span>Copper Luxe</span><em class="new-mark" title="New theme">✦ NEW</em></button>
+        </div>
+        <div class="theme-palette-heading theme-family-heading"><strong>Beyond Glass · Design Languages</strong><span>8 curated styles</span></div>
+        <div class="theme-grid">
+<button type="button" class="theme-option new-theme double-new" data-theme="swiss"><i></i><span>Swiss Clarity</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="paper"><i></i><span>Paper & Ink</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="terminal"><i></i><span>Terminal CRT</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="material"><i></i><span>Material 3</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="academia"><i></i><span>Dark Academia</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="eink"><i></i><span>E-Ink Paper</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="frutiger"><i></i><span>Frutiger Aero</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+<button type="button" class="theme-option new-theme double-new" data-theme="editorial"><i></i><span>Editorial Noir</span><em class="new-mark" title="New design language">✦✦ NEW</em></button>
+        </div>
+        </div>
+      </div>
+    </section>
+
     <section class="notice">
       <strong>Privacy:</strong> The file is first hashed locally. If VirusTotal already knows that hash, the file itself is not uploaded. If it is unknown, you must explicitly choose to upload it to VirusTotal.
     </section>
@@ -54,6 +101,7 @@
       <div id="historyList" class="list"></div>
     </section>
   </main>
+  <script src="theme.js"></script>
   <script src="file-scanner.js"></script>
 </body>
 </html>

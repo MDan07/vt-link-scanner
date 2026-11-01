@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "VT Link Scanner",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Pre-click link protection with VirusTotal plus automatic completed-download monitoring and file scanning workflow.",
   "minimum_chrome_version": "102",
   "permissions": [

@@ -1,55 +1,30 @@
-# VT Link Scanner 2.3.0
+# VT Link Scanner — Changelog
 
-## Automatic download monitoring
-- Added automatic detection of completed Chrome downloads.
-- Added a desktop notification when a download finishes, with a direct "scan this download" workflow.
-- The File Scanner can be opened directly for the detected download.
-- After the user selects the matching local file, scanning starts automatically.
-- Added a setting to turn completed-download monitoring on/off.
-- Important: Chrome MV3 does not expose arbitrary Downloads-folder bytes to an extension, so a pure extension cannot silently hash/upload every downloaded file. True zero-click content scanning requires a Native Messaging companion/native helper.
+## [2.4.0] — 2026-11-02
 
-# VT Link Scanner 2.2.0
+### Added
+- Added a theme collection with 20 original Glass / Liquid Glass themes and 8 additional non-glass design-language themes.
+- Added a dedicated **Beyond Glass** theme section in the Appearance selector.
+- Added double-star (`✦✦ NEW`) markers to identify the newly introduced non-glass themes.
+- Added persistent theme selection shared by the extension popup and File Scanner.
 
-# VT Link Scanner 2.1.1
+### Improved
+- Improved theme contrast for primary text, secondary text, buttons, inputs, placeholders, and warning/status surfaces.
+- Isolated the Beyond Glass theme picker styling so selected theme button rules do not unintentionally restyle the theme tiles.
+- Refined the retained new-theme collection for clearer, more consistent presentation.
 
-## Bug fix / final audit
-- Fixed and regression-checked API-key removal so deleting one key removes only the selected key.
-- Re-audited the 2.1.0 scanner code for JavaScript syntax and manifest validity before release.
+### Theme collection
+- Existing themes retained: 20.
+- New non-glass themes retained: 8.
+- Four visually heavy additions from the first Beyond Glass draft were removed after review.
+- Existing link scanning, VirusTotal API-key rotation, file scanning, download monitoring, and scanner behavior are unchanged in this release.
 
-# VT Link Scanner 2.1.0
+### Notes and limitations
+- Theme contrast was checked at the design-token level; browser rendering can vary by browser, operating system, and display settings.
+- Chrome Manifest V3 does not provide extensions with unrestricted access to arbitrary downloaded-file bytes. Download monitoring still requires the user to select the downloaded file for content scanning.
+- A clean VirusTotal result is not a guarantee that a URL or file is safe.
 
-## New security features
-- Deep Scan unknown URLs: the user can explicitly submit an unknown URL to VirusTotal, wait for analysis to complete, and then receive the resulting classification.
-- Domain reputation lookup for unknown URLs. The URL itself is not submitted unless the user chooses Deep Scan.
-- RDAP domain-age lookup for additional context on new domains.
-- Local URL heuristics for deceptive `@`/userinfo URLs, IP-host URLs, punycode, very long URLs, many subdomains, higher-risk TLDs, heavy encoding, and unusually many query parameters.
-- A separate heuristic risk score (0-100) with Low/Moderate/High/Critical levels. This is an extension heuristic, not a VirusTotal score.
-- VirusTotal's known final redirect destination can be checked and included in the risk decision.
+---
 
-## Multiple API keys
-- Multiple VirusTotal API keys are supported.
-- Rate-limited/rejected keys are cooled down and the scanner rotates to another configured key.
-- Existing 1.x single-key installations are migrated automatically.
-- `.env` import/export remains available for moving keys between computers.
-
-## Behavior
-- Unknown links now offer **Scan it now** instead of only asking whether to open them.
-- Deep Scan explicitly warns that submitting a URL may make it visible on VirusTotal.
-- Heuristics never manufacture a malicious verdict by themselves; they can raise a clean/unknown result to a warning when enough risk signals exist.
-- Existing caching, exceptions, same-site scanning, context-menu scanning, and direct post-scan navigation are preserved.
-
-## Known limits
-- RDAP registration dates depend on the registry and may be unavailable or privacy-redacted.
-- VirusTotal's `last_final_url` is a known/reported destination, not a guarantee about a server's future redirect behavior.
-- JavaScript-driven navigations such as `window.open()` and arbitrary `location=` assignments outside normal link clicks cannot all be intercepted by a content script.
-- Browser-internal pages such as `chrome://` cannot be scanned by normal extension content scripts.
-
-## 2.2.0 — File Scanner
-- Added a dedicated VirusTotal File Scanner page.
-- Added recent Chrome download discovery using the Downloads API.
-- Files are hashed locally with SHA-256 first; known hashes are checked without re-uploading the file.
-- Unknown files require an explicit user action before upload to VirusTotal.
-- Added VirusTotal file-analysis polling and file scan history/cache.
-- Added multi-key rotation and rate-limit handling for file API requests.
-- Supports VirusTotal uploads up to 32 MB directly and uses VirusTotal's upload URL for larger supported files; local hashing is limited to 100 MB to avoid excessive memory use.
-- Important Chrome limitation: the extension cannot silently read arbitrary downloaded-file bytes from the Downloads folder, so the user must select the file in the picker.
+## [2.3.0]
+- First packaged public release. See the GitHub release notes and repository history for the 2.3.0 feature set.
