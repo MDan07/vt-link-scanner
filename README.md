@@ -52,6 +52,12 @@ Safe Link — No engines flagged the URL
 <p align="center">
   <img src="screenshots/scan%20result.png" width="100%" alt="Safe link scan result notification">
 </p>
+Blocked Malicious Link — Threat detected
+
+<p align="center">
+  <img src="screenshots/sus.png" width="100%" alt="Blocked malicious link notification">
+</p>
+
 ## Features
 
 ### URL Protection
