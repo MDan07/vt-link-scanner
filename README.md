@@ -1,4 +1,4 @@
-# VT Link Scanner 2.3.0
+# VT Link Scanner 2.4.0
 
 A Chrome MV3 extension that checks HTTP(S) links against VirusTotal before opening them.
 
