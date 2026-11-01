@@ -1,105 +1,218 @@
 # VT Link Scanner 2.4.0
 
-A Chrome MV3 extension that checks HTTP(S) links against VirusTotal before opening them.
+**Scan links before opening them with the power of VirusTotal.**
 
-## What's new in 2.4.0
-- 28 selectable appearance themes: 20 existing Glass / Liquid Glass themes plus 8 non-glass design-language themes.
-- New non-glass themes are grouped under **Beyond Glass** and marked with **✦✦ NEW**.
-- Improved contrast and readability across text, controls, inputs, buttons, and status surfaces.
-- Theme selection is shared by the popup and File Scanner.
+VT Link Scanner is a Chrome extension that checks HTTP and HTTPS URLs against [VirusTotal](https://www.virustotal.com/) to help identify potentially malicious websites, suspicious links, and unsafe destinations.
 
-See [CHANGES.md](CHANGES.md) for the full changelog.
+It combines VirusTotal threat intelligence with additional local URL-risk checks in a simple interface.
 
+---
 
-## Main features
+## Screenshots
 
-- Multiple VirusTotal API keys with automatic rotation/cooldown.
-- 24-hour cache for known reports and shorter cache for unknown results.
-- Explicit **Deep Scan** for URLs that VirusTotal has never analyzed.
-- Waits for VirusTotal analysis to complete before showing the Deep Scan result.
+### Application Preview
+
+![VT Link Scanner Screenshot 1](screenshots/Screenshot%202026-11-02%20044004.png)
+
+![VT Link Scanner Screenshot 2](screenshots/Screenshot%202026-11-02%20044015.png)
+
+![VT Link Scanner Screenshot 3](screenshots/Screenshot%202026-11-02%20044035.png)
+
+![VT Link Scanner Screenshot 4](screenshots/Screenshot%202026-11-02%20044050.png)
+
+![VT Link Scanner Screenshot 5](screenshots/Screenshot%202026-11-02%20044106.png)
+
+![VT Link Scanner Screenshot 6](screenshots/Screenshot%202026-11-02%20044115.png)
+
+---
+
+## Features
+
+### URL Protection
+
+- Checks HTTP and HTTPS links against VirusTotal.
+- Multiple VirusTotal API keys with automatic rotation and cooldown.
+- 24-hour caching for known reports and shorter caching for unknown results.
+- Deep Scan for URLs that VirusTotal has never analyzed.
+- Waits for VirusTotal analysis to finish before displaying Deep Scan results.
 - Domain reputation lookup for unknown URLs.
-- RDAP-based domain registration-age signal when available.
+- RDAP-based domain registration-age signals when available.
 - Local URL-risk heuristics for common deceptive URL patterns.
-- Separate extension heuristic risk score (not a VirusTotal score).
-- VirusTotal known final-destination/redirect checks.
-- Same-site scanning toggle.
-- Context-menu "Scan link with VirusTotal".
-- `.env` import/export for API-key backup and migration.
-- API keys remain in extension storage and are not exposed to page content scripts.
+- Separate extension heuristic risk score.
+- Checks known final destinations and redirects when available.
+- Optional same-site scanning.
+- Right-click context menu: **Scan link with VirusTotal**.
 
-## Deep Scan privacy
-Deep Scan submits the URL to VirusTotal. Do not use it on URLs containing secrets such as password-reset tokens, private identifiers, or session tokens unless you are comfortable submitting that URL to VirusTotal.
+### File Scanner
 
-## Install
-1. Extract the ZIP.
-2. Open `chrome://extensions`.
-3. Enable **Developer mode**.
-4. Click **Load unpacked**.
-5. Select the extracted extension folder.
-6. Add one or more VirusTotal API keys in the popup.
+- Dedicated interface for scanning downloaded files.
+- Displays recent Chrome downloads.
+- Calculates SHA-256 locally before checking VirusTotal.
+- Checks whether a file hash already has a VirusTotal report.
+- Requests confirmation before uploading a file that VirusTotal has not seen.
+- Supports local hashing of files up to 100 MB.
+- Uses VirusTotal's larger-file upload URL where available.
 
-## `.env` migration
-Use **Export .env** on the old computer and **Import .env** on the new computer. The browser requires the user to explicitly choose the file; an extension cannot silently search the computer for `.env` files.
+### Appearance
 
-The file is plain text and must be kept private.
+- 28 selectable themes.
+- 20 Glass / Liquid Glass themes.
+- 8 additional design styles in the Beyond Glass collection.
+- Theme selection is shared between the popup and File Scanner.
+- Customizable visual appearance without changing the scanning engine.
 
-## Security model
-The extension does not claim that a VirusTotal clean result guarantees safety. A clean result means that the available VirusTotal signals did not flag the resource at the time of analysis. Heuristic signals are advisory and can increase a warning level but do not independently label a URL as malicious.
+### API Key Management
 
-Not affiliated with VirusTotal.
+- Add multiple VirusTotal API keys.
+- Automatic key rotation and cooldown handling.
+- Import and export API keys using `.env` files.
+- API keys are stored in extension storage and are not exposed to webpage content scripts.
 
-## Automatic download monitoring
+---
 
-Completed Chrome downloads are detected automatically when the **Automatic download monitoring** setting is enabled. You receive a desktop notification with a direct link to the File Scanner.
+## Installation
 
-Because Chrome's MV3 Downloads API exposes download metadata but not arbitrary local file bytes, the extension still requires one file-picker selection for the actual bytes. Once the user selects the detected file, the scan starts automatically.
+1. Download the latest ZIP from the [Releases page](https://github.com/MDan07/vt-link-scanner/releases).
+2. Extract the ZIP file.
+3. Open Chrome and navigate to:
 
-A completely zero-click scan of arbitrary downloaded files is not possible with an extension alone. That requires a Native Messaging companion/native helper with local filesystem access.
+   `chrome://extensions`
 
-## File Scanner
+4. Enable **Developer mode**.
+5. Click **Load unpacked**.
+6. Select the extracted extension folder (the folder containing `manifest.json`).
+7. Open VT Link Scanner and configure your VirusTotal API key.
 
-VT Link Scanner now includes a dedicated **File Scanner**. It can show recent Chrome downloads and lets you select a downloaded file for scanning.
+---
 
-The scanner first calculates the file's SHA-256 locally and checks VirusTotal's existing file report. If the hash is unknown, it asks before uploading the file. This avoids unnecessary uploads and makes the privacy boundary explicit.
+## Getting a VirusTotal API Key
 
-Chrome extensions cannot silently read arbitrary local downloaded-file bytes, so a completed download cannot be uploaded automatically just from the Downloads API. The user must select the file. Files up to 100 MB can be locally hashed; VirusTotal upload handling supports the normal direct endpoint and its larger-file upload URL where available.
+You need a VirusTotal account and an API key to use the scanning features.
 
+If you have never used VirusTotal before, follow these steps:
 
-## Appearance themes (visual-only update)
+### Step 1 — Create a VirusTotal account
 
-The interface includes 12 selectable dark glass finishes: Midnight, Arctic, Aurora, Emerald, Sapphire, Amethyst, Rose Quartz, Graphite, Solar Flare, Deep Ocean, Cyberpunk, and Carbon. The selected appearance is shared between the extension popup and File Scanner using extension-origin local storage.
+Visit the official VirusTotal website:
 
-This visual update adds `theme.js` and updates the popup/File Scanner HTML and CSS. The scanner engine, API-key cycling, VirusTotal requests, permissions, settings behavior, download detection, and file-scanning logic are unchanged.
+[https://www.virustotal.com/](https://www.virustotal.com/)
 
-**Glass transparency limitation:** Chromium extension action popups are rendered as separate browser surfaces. CSS backdrop blur can style and blur the popup's own layered surfaces, but cannot reliably sample the live webpage behind the popup. The File Scanner tab can show layered glass over its own ambient background; the popup uses a simulated glass finish.
+1. Click **Sign up**.
+2. Register using your email address.
+3. Verify your email if requested.
+4. Log in to your account.
 
+### Step 2 — Open your API key page
 
-## Glass Collection — Contrast Edition
+Once logged in, visit the official API key page:
 
-The appearance system includes 20 dark glass finishes. The original 12 themes are retained, with 8 additional themes marked **✦ NEW** in the theme palette:
+[**Get your VirusTotal API key**](https://www.virustotal.com/gui/my-apikey)
 
-- Obsidian
-- Cobalt
-- Lunar Silver
-- Crimson Noir
-- Jade Empire
-- Ultraviolet
-- Glacier
-- Copper Luxe
+Your personal API key will be displayed on this page.
 
-The palette uses a custom high-contrast selector with visible swatches, readable labels, selected-state styling, and a small NEW marker on added themes. Theme selection is saved locally and shared between the extension popup and File Scanner page.
+Copy the API key.
 
-The visual refinement increases secondary-text contrast and improves focus and hover visibility. Browser extension popups cannot reliably sample the webpage behind the popup; blur and translucency are therefore simulated within the extension surface.
+### Step 3 — Add your API key to VT Link Scanner
 
+1. Open VT Link Scanner from the Chrome extensions menu.
+2. Find the **VirusTotal API keys** section.
+3. Paste your copied key into the API key input field.
+4. Click **Add**.
+5. Confirm that your key appears in the configured API keys list.
 
-### Appearance themes
-The appearance picker keeps the original 20 glass finishes and adds 12 non-glass design languages: Swiss Clarity, Paper & Ink, Terminal CRT, Neo-Brutalist, Bauhaus, Material 3, Clay Studio, Y2K Chrome, Dark Academia, E-Ink Paper, Frutiger Aero, and Editorial Noir. New styles are marked with a double star (✦✦ NEW). The new options deliberately change surface treatment, typography mood, control shape, and contrast—not just the accent color.
+You can add multiple API keys if you have them.
 
+**Important:** Keep your API key private. Never publish it in screenshots, GitHub commits, README files, or public messages.
 
-## Beyond Glass — refined design languages
-- Preserved all 20 original Glass Collection themes and all 8 added contrast-edition themes.
-- Retained 8 non-glass design languages: Swiss Clarity, Paper & Ink, Terminal CRT, Material 3, Dark Academia, E-Ink Paper, Frutiger Aero, and Editorial Noir.
-- Removed Neo-Brutalist, Bauhaus, Clay Studio, and Y2K Chrome from the picker because their visual treatment was too loud/inconsistent for the scanner interface.
-- Corrected helper/secondary text, warning banners, form controls, cards, and buttons with theme-matched contrast tokens.
-- Isolated the theme picker styling so the selected theme cannot recolor its own option buttons.
-- Kept the double-star (✦✦ NEW) marker on every retained new design language.
+### VirusTotal API limitations
+
+VirusTotal applies usage limits to its API. The available limits depend on your account and API access level.
+
+The public API is intended for non-commercial use and has strict request limits. Check VirusTotal's official documentation for the current restrictions:
+
+[VirusTotal API Documentation](https://docs.virustotal.com/reference/overview)
+
+---
+
+## Deep Scan & Privacy
+
+Deep Scan submits a URL to VirusTotal for analysis when no existing report is available.
+
+**Do not submit URLs containing sensitive information**, including:
+
+- Password-reset tokens.
+- Private identifiers.
+- Session tokens.
+- Confidential links.
+- Other URLs that should not be shared with third parties.
+
+Submitting a URL to VirusTotal means sharing it with the service under its applicable policies.
+
+---
+
+## File Scanner & Download Monitoring
+
+When **Automatic download monitoring** is enabled, the extension detects completed Chrome downloads and displays a desktop notification with a direct link to the File Scanner.
+
+The extension then requires you to select the downloaded file through the file picker before it can access and scan the file's contents.
+
+The scanner calculates the file's SHA-256 hash locally and checks VirusTotal for an existing report.
+
+If no report exists, the extension asks for confirmation before uploading the file.
+
+**Why is manual file selection required?**
+
+Chrome's Manifest V3 Downloads API provides download metadata but does not give an extension unrestricted access to the downloaded file's contents.
+
+Consequently, fully automatic scanning of arbitrary downloaded files without user interaction requires an additional native helper application using Native Messaging.
+
+---
+
+## Importing & Exporting API Keys
+
+VT Link Scanner supports `.env` import and export to make it easier to migrate API keys between computers.
+
+- On your old computer, use **Export .env**.
+- Transfer the exported file securely.
+- On your new computer, use **Import .env**.
+
+The browser requires you to explicitly select the file. The extension cannot silently search your computer for `.env` files.
+
+**Security warning:** The exported `.env` file contains sensitive API credentials. Keep it private and never upload it to GitHub.
+
+---
+
+## Security & Detection Disclaimer
+
+VT Link Scanner is a security assistance tool, not a guarantee of protection.
+
+- A clean VirusTotal result does not guarantee that a URL or file is safe.
+- Detection results depend on the available VirusTotal engines and intelligence at the time of analysis.
+- Local heuristic checks provide additional warning signals but are not definitive malware detections.
+- The extension's heuristic risk score is separate from VirusTotal's detection results.
+- Always exercise caution when opening unfamiliar links or files.
+
+---
+
+## Known Limitations
+
+- VirusTotal API usage is subject to account-specific rate limits.
+- Deep Scan submits previously unknown URLs to VirusTotal.
+- Files must be explicitly selected through the file picker before their contents can be accessed.
+- Browser extension popups cannot reliably sample the live webpage behind them. Glass transparency is therefore simulated within the extension interface.
+
+---
+
+## Changelog
+
+See [CHANGES.md](https://github.com/MDan07/vt-link-scanner/blob/main/CHANGES.md) for version history and changes.
+
+For release downloads, visit the [GitHub Releases page](https://github.com/MDan07/vt-link-scanner/releases).
+
+---
+
+## Disclaimer
+
+VT Link Scanner is an independent project and is **not affiliated with, endorsed by, or officially associated with VirusTotal or Google Chrome**.
+
+VirusTotal is a trademark of its respective owner.
